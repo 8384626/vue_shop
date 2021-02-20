@@ -8,11 +8,13 @@ export function request(config) {
 
   // 请求拦截
   instance.interceptors.request.use(config=>{
+    config.headers.Authorization = window.sessionStorage.getItem('token')
     return config
   },err=>{})
   
   //响应拦截
   instance.interceptors.response.use(res=>{
+    console.log(res);
     return res.data
   },err=>{})
 
