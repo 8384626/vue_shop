@@ -1,27 +1,16 @@
-import { request } from "./request";
+import http from "./http";
 
+// 左侧菜单权限
 export function getHomeMenuList() {
-  return request({
-    url: "/menus",
-  });
+  return http.get("/menus")
 }
 
 // 用户数据列表的请求
 export function getUserList(query,pagenum,pagesize) {
-  return request({
-    url: "/users",
-    params: {
-      query,
-      pagenum,
-      pagesize
-    },
-  });
+  return http.get("/users",{query,pagenum,pagesize})
 }
 
 // 修改用户状态
 export function updateState(uId,type){
-  return request({
-    url:`users/${uId}/state/${type}`,
-    method: "PUT",
-  })
+  return http.put(`users/${uId}/state/${type}`,{uId,type})
 }

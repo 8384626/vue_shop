@@ -1,8 +1,6 @@
-import { request } from './request'
+import http from "./http";
+
 
 export function getLoginDate(user){
-  return request({
-    url: '/login',
-    params:user
-  })
+  return http.post("/login",user)
 }
