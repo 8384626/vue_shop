@@ -5,6 +5,8 @@ const Login = () =>import('views/Login/login.vue')
 const Home = () =>import('views/Home/home.vue')
 const WelCome = () =>import('views/Home/HomeChildren/WelCome')
 const Users= () =>import('components/content/User/Users.vue')
+const Rights= () =>import('components/content/Power/Rights.vue')
+const Roles= () =>import('components/content/Power/Roles.vue')
 
 Vue.use(VueRouter)
 
@@ -29,7 +31,15 @@ const routes = [
       {
         path:'/users',
         component:Users
-      }
+      },
+      {
+        path:'/rights',
+        component:Rights
+      },
+      {
+        path:'/roles',
+        component:Roles
+      },
     ]
   }
 ]

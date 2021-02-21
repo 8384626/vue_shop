@@ -52,51 +52,29 @@
                 </el-switch>
               </template>
             </el-table-column>
-            <el-table-column label="操作">
+            <el-table-column label="操作" width="350"
+              >>
               <template slot-scope="scope">
                 <!-- 修改按钮 -->
-                <el-tooltip
-                  effect="dark"
-                  content="修改"
-                  placement="top"
-                  :enterable="false"
+                <el-button
+                  type="primary"
+                  icon="el-icon-edit"
+                  @click="showEditDialog(scope.row.id)"
+                  >修改</el-button
                 >
-                  <el-button
-                    type="primary"
-                    icon="el-icon-edit"
-                    circle
-                    @click="showEditDialog(scope.row.id)"
-                  ></el-button>
-                </el-tooltip>
 
                 <!-- 删除按钮 -->
-                <el-tooltip
-                  effect="dark"
-                  content="删除"
-                  placement="top"
-                  :enterable="false"
+                <el-button
+                  type="danger"
+                  icon="el-icon-delete"
+                  @click="removeUserById(scope.row.id)"
+                  >删除</el-button
                 >
-                  <el-button
-                    type="danger"
-                    icon="el-icon-delete"
-                    circle
-                    @click="removeUserById(scope.row.id)"
-                  ></el-button>
-                </el-tooltip>
 
                 <!-- 分配角色 -->
-                <el-tooltip
-                  effect="dark"
-                  content="分配角色"
-                  placement="top"
-                  :enterable="false"
+                <el-button type="warning" icon="el-icon-setting"
+                  >分配权限</el-button
                 >
-                  <el-button
-                    type="warning"
-                    icon="el-icon-setting"
-                    circle
-                  ></el-button>
-                </el-tooltip>
               </template>
             </el-table-column>
           </el-table>

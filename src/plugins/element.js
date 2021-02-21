@@ -24,7 +24,8 @@ import {
   Tooltip,
   Pagination,
   Dialog,
-  MessageBox
+  MessageBox,
+  Tag
 } from "element-ui";
 
 // login注册的插件
@@ -44,7 +45,7 @@ Vue.use(Submenu);
 Vue.use(MenuItemGroup);
 Vue.use(MenuItem);
 
-// user注册的查件
+// user注册的插件
 Vue.use(Breadcrumb);
 Vue.use(BreadcrumbItem);
 Vue.use(Card);
@@ -58,6 +59,8 @@ Vue.use(Pagination);
 Vue.use(Dialog);
 Vue.prototype.$confirm = MessageBox.confirm
 
+// Rights注册的插件
+Vue.use(Tag)
 
 
 
