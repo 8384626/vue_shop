@@ -1,5 +1,4 @@
 import axios from "axios";
-axios.defaults.headers.post["Content-Type"] = "application/json;charset=utf-8";
 axios.defaults.baseURL='http://www.ysqorz.top:8888/api/private/v1',
 axios.defaults.timeout = 5000;
 
@@ -136,6 +135,35 @@ let http = {
       } else {
         axios({
           method: "PUT",
+          url,
+        })
+          .then((res) => {
+            resolve(res);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      }
+    })
+  },
+  delete:(url, data) =>{
+    return new Promise((resolve,reject)=>{
+      if (typeof data === "object") {
+        /*it goes in here when the user has added a data param when calling the get method*/
+        axios({
+          method: "DELETE",
+          url,
+          data,
+        })
+          .then((res) => {
+            resolve(res);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      } else {
+        axios({
+          method: "DELETE",
           url,
         })
           .then((res) => {
