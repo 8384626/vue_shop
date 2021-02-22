@@ -28,7 +28,8 @@ import {
   Dialog,
   MessageBox,
   Tag,
-  Tree
+  Tree,
+  Cascader
 } from "element-ui";
 
 // login注册的插件
@@ -68,6 +69,8 @@ Vue.prototype.$confirm = MessageBox.confirm
 Vue.use(Tag)
 Vue.use(Tree)
 
+// Goods注册的组件
+Vue.use(Cascader)
 
 
 

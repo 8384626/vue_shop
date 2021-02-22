@@ -172,9 +172,7 @@
         ></el-tree>
         <span slot="footer" class="dialog-footer">
           <el-button @click="isShowSetVisible = false">取 消</el-button>
-          <el-button type="primary" @click="allotRights"
-            >确 定</el-button
-          >
+          <el-button type="primary" @click="allotRights">确 定</el-button>
         </span>
       </el-dialog>
     </div>
@@ -182,7 +180,7 @@
 </template>
 
 <script>
-import RolesVue from '../Roles.vue';
+import RolesVue from "../Roles.vue";
 export default {
   props: {
     roleList: {
@@ -247,9 +245,9 @@ export default {
         children: "children",
       },
       // 默认选中节点的id值数组
-      defKeys:[],
+      defKeys: [],
       // 当前即将分配权限的角色id
-      roleId:''
+      roleId: "",
     };
   },
   methods: {
@@ -279,14 +277,9 @@ export default {
         this.isShowEditVisible = false;
       });
     },
-    removeUserById(param) {
-      this.$emit("removeRolesDate", param);
-    },
-    // 根据id删除对应的权限
-    async removeRolesById(param) {
-      // 弹框提示用户是否要删除
+    async removeUserById(param) {
       const result = await this.$confirm(
-        "是否确认删除该权限, 是否继续?",
+        "是否确认删除该角色, 是否继续?",
         "提示",
         {
           confirmButtonText: "确定",
@@ -295,35 +288,39 @@ export default {
         }
       ).catch((err) => err);
       if (result !== "confirm") return;
+      this.$emit("removeRolesDate", param);
+    },
+    // 根据id删除对应的权限
+    async removeRolesById(param) {
       this.param = param;
       this.$emit("removeRolesById", param);
     },
     // 展示分配权限
     showSetRightDialog(role) {
-      this.roleId=role.id
+      this.roleId = role.id;
       this.$emit("getRolseList");
       // 递归获取三级节点的Id
-      this.defKeys=[]
-      this.getLeafKeys(role,this.defKeys)
+      this.defKeys = [];
+      this.getLeafKeys(role, this.defKeys);
       this.isShowSetVisible = true;
     },
     // 通过 递归 获取角色下所有权限的id 并保存到数组中
-    getLeafKeys(node, arr){
-      if(!node.children){
-        return arr.push(node.id)
+    getLeafKeys(node, arr) {
+      if (!node.children) {
+        return arr.push(node.id);
       }
-      node.children.forEach(item => this.getLeafKeys(item, arr));
+      node.children.forEach((item) => this.getLeafKeys(item, arr));
     },
     // 为角色分配权限
-    allotRights(){
-      const keys=[
+    allotRights() {
+      const keys = [
         ...this.$refs.treeRef.getCheckedKeys(),
         ...this.$refs.treeRef.getHalfCheckedKeys(),
-      ]
-      const keyStrs=keys.join(',')
-      let params={roleId:this.roleId,rids:keyStrs}
+      ];
+      const keyStrs = keys.join(",");
+      let params = { roleId: this.roleId, rids: keyStrs };
       this.$emit("setRolseList", params);
-      this.isShowSetVisible= false
+      this.isShowSetVisible = false;
     },
   },
   watch: {
