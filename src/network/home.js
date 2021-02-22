@@ -34,3 +34,12 @@ export function updateUserData(dataArray){
 export function deleteUsers(id){
   return http.delete(`users/${id}`,id)
 }
+
+// 获取所有角色的列表
+export function getRolesList(){
+  return http.get('roles')
+}
+// 分配用户角色
+export function saveRole(data){
+  return http.put(`users/${data.id}/role`,data)
+}

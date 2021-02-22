@@ -1,7 +1,7 @@
 <template>
-  <div class="CarView">
+  <div>
     <el-card>
-      <el-table :data="rightsList" border stripe>
+      <el-table :data="rightsList" border stripe height="calc(100vh - 190px)">
         <el-table-column label="#" type="index"></el-table-column>
         <el-table-column label="权限名称" prop="authName"></el-table-column>
         <el-table-column label="路径" prop="path"></el-table-column>
@@ -33,9 +33,5 @@ export default {
 </script>
 
 <style scoped>
-.CarView{
-  height: calc(100vh - 130px);
-  /* overflow: scroll; */
-  overflow-y: scroll;
-}
+
 </style>

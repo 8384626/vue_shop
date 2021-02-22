@@ -8,6 +8,11 @@
       :roleEdit="roleEdit"
       @submitUpdate="submitUpdate"
       @removeRolesDate="removeRolesDate"
+      @removeRolesById="removeRolesById"
+      :roleChildrenList="roleChildrenList"
+      @getRolseList="getRolseList"
+      :getRoleslist="getRoleslist"
+      @setRolseList="setRolseList"
     ></roles-card-view>
   </div>
 </template>
@@ -22,7 +27,10 @@ import {
   addRoles,
   getRolesById,
   updateRoles,
-  deleteRoles
+  deleteRoles,
+  removeRoles,
+  getRolseList,
+  setRolseList,
 } from "network/power";
 
 export default {
@@ -30,6 +38,8 @@ export default {
     return {
       roleList: [],
       roleEdit: {},
+      roleChildrenList: [],
+      getRoleslist: [],
     };
   },
   methods: {
@@ -41,12 +51,22 @@ export default {
       this.getRolesById(id);
     },
     submitUpdate(value) {
-      console.log(value);
       this.updateRoles(value);
     },
-    removeRolesDate(value){
-      console.log(value);
-      this.deleteRoles(value)
+    removeRolesDate(value) {
+      this.deleteRoles(value);
+    },
+    // 根据 ID 删除对应的权限
+    removeRolesById(value) {
+      this.removeRoles(value);
+    },
+    // 获取权限列表
+    getRolseList() {
+      this.getRolseList();
+    },
+    // 配置角色权限
+    setRolseList(value) {
+      this.setRolseList(value);
     },
     /**
      * 网络请求相关的数据
@@ -56,7 +76,6 @@ export default {
         if (res.meta.status !== 200) {
           return this.$message.error("获取数据失败");
         }
-        console.log(res);
         this.roleList = res.data;
       });
     },
@@ -82,20 +101,49 @@ export default {
         if (res.meta.status !== 200) {
           return this.$message.error("获取修改数据失败");
         }
-        this.$message.success("修改数据成功")
+        this.$message.success("修改数据成功");
         this.getRolesList();
       });
     },
     deleteRoles(id) {
-      deleteRoles(id).then(res=>{
+      deleteRoles(id).then((res) => {
         if (res.meta.status !== 200) {
           return this.$message.error("删除数据失败");
         }
-        this.$message.success("删除数据成功")
+        this.$message.success("删除数据成功");
         this.getRolesList();
-      })
-    }
+      });
+    },
+    removeRoles(data) {
+      removeRoles(data).then((res) => {
+        if (res.meta.status !== 200) {
+          return this.$message.error("删除对应权限失败");
+        }
+        this.roleChildrenList = res.data;
+        this.$message.success("删除权限成功");
+      });
+    },
+    // 权限列表的访问请求
+    getRolseList() {
+      getRolseList().then((res) => {
+        if (res.meta.status !== 200) {
+          return this.$message.error("获取权限失败");
+        }
+        this.getRoleslist = res.data;
+      });
+    },
+    // 为角色分配权限
+    setRolseList(data) {
+      setRolseList(data).then((res) => {
+        if (res.meta.status !== 200) {
+          return this.$message.error("更新权限失败");
+        }
+        this.$message.success("更新权限成功");
+        this.getRolesList();
+      });
+    },
   },
+
   components: { BreadCrumbNav, RolesCardView },
 
   // 所有hook

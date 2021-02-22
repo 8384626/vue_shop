@@ -13,6 +13,8 @@ import {
   Submenu,
   MenuItemGroup,
   MenuItem,
+  Select,
+  Option,
   Breadcrumb,
   BreadcrumbItem,
   Card,
@@ -25,7 +27,8 @@ import {
   Pagination,
   Dialog,
   MessageBox,
-  Tag
+  Tag,
+  Tree
 } from "element-ui";
 
 // login注册的插件
@@ -44,6 +47,8 @@ Vue.use(Menu);
 Vue.use(Submenu);
 Vue.use(MenuItemGroup);
 Vue.use(MenuItem);
+Vue.use(Select);
+Vue.use(Option);
 
 // user注册的插件
 Vue.use(Breadcrumb);
@@ -61,6 +66,7 @@ Vue.prototype.$confirm = MessageBox.confirm
 
 // Rights注册的插件
 Vue.use(Tag)
+Vue.use(Tree)
 
 
 

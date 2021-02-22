@@ -28,3 +28,17 @@ export function updateRoles(data){
 export function deleteRoles(id){
   return http.delete(`roles/${id}`,id)
 }
+// 根据 ID 删除对应的权限
+export function removeRoles(data){
+  return http.delete(`roles/${data.roleId.id}/rights/${data.rightId}`,data)
+}
+
+// 展示所有权限列表
+export function getRolseList(){
+  return http.get('rights/tree')
+}
+
+// 角色分配权限
+export function setRolseList(data){
+  return http.post(`roles/${data.roleId}/rights`, data)
+}

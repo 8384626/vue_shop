@@ -72,8 +72,11 @@
                 >
 
                 <!-- 分配角色 -->
-                <el-button type="warning" icon="el-icon-setting"
-                  >分配权限</el-button
+                <el-button
+                  type="warning"
+                  icon="el-icon-setting"
+                  @click="setRole(scope.row)"
+                  >分配角色</el-button
                 >
               </template>
             </el-table-column>
@@ -163,6 +166,31 @@
         </span>
       </el-dialog>
     </div>
+    <!-- 分配角色的对话框 -->
+    <div>
+      <el-dialog title="分配角色" :visible.sync="isShowRoleVisible" width="30%" @close="setRoleDateClose">
+        <div>
+          <p>当前的用户:  {{ userInfo.username }}</p>
+          <p>当前的角色:  {{ userInfo.role_name }}</p>
+          <p>
+            <span>分配新角色:  </span>
+            <el-select v-model="selectedRoledId" placeholder="请选择">
+              <el-option
+                v-for="item in rolesList"
+                :key="item.id"
+                :label="item.roleName"
+                :value="item.id"
+              >
+              </el-option>
+            </el-select>
+          </p>
+        </div>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="isShowRoleVisible = false">取 消</el-button>
+          <el-button type="primary" @click="saveRoleInfo">确 定</el-button>
+        </span>
+      </el-dialog>
+    </div>
   </div>
 </template>
 
@@ -174,6 +202,8 @@ import {
   getIdData,
   updateUserData,
   deleteUsers,
+  getRolesList,
+  saveRole,
 } from "network/home";
 
 export default {
@@ -202,6 +232,7 @@ export default {
       total: 0,
       isShowAddVisible: false,
       isShowEditVisible: false,
+      isShowRoleVisible: false,
       addForm: {
         username: "",
         password: "",
@@ -237,6 +268,12 @@ export default {
           { validator: checkMobile, tigger: "blur" },
         ],
       },
+      // 需要被分配角色的用户信息
+      userInfo: {},
+      // 所有角色的数据列表
+      rolesList: [],
+      // 已选中的角色 ID 值
+      selectedRoledId: "",
     };
   },
   created() {
@@ -245,19 +282,16 @@ export default {
   methods: {
     // 监听 switch 开关状态的改变
     userStatechanged(userinfo) {
-      console.log(userinfo);
       this.updateState(userinfo);
     },
 
     //监听 pagesize改变的事件
     handleSizeChange(newSize) {
-      console.log(newSize);
       this.queryInfo.pagesize = newSize;
       this.getUserList(this.queryInfo);
     },
     // 监听页码值改变的事件
     handleCurrentChange(newPage) {
-      console.log(newPage);
       this.queryInfo.pagenum = newPage;
       this.getUserList(this.queryInfo);
     },
@@ -329,12 +363,30 @@ export default {
         if (res.meta.status !== 200) {
           return this.$message.error("删除失败");
         }
-        console.log(res);
         this.$message.success("删除成功");
         this.getUserList(this.queryInfo);
       });
     },
-
+    // 展示分配角色的对话框
+    setRole(userInfo) {
+      this.userInfo = userInfo;
+      this.getRolesList();
+      this.isShowRoleVisible = true;
+    },
+    // 点击按钮分配角色
+    saveRoleInfo() {
+      if (!this.selectedRoledId) {
+        return this.$message.error("请选择要分配的角色");
+      }
+      let value = { id: this.userInfo.id, rid: this.selectedRoledId };
+      this.saveRole(value);
+      this.isShowRoleVisible = false;
+    },
+    // 监听分配角色对话框的监听事件
+    setRoleDateClose(){
+      this.selectedRoledId='',
+      this.userInfo={}
+    },
     /**
      * 网络请求相关代码
      */
@@ -367,6 +419,23 @@ export default {
     },
     deleteUsers(id) {
       return deleteUsers(id);
+    },
+    getRolesList() {
+      getRolesList().then((res) => {
+        if (res.meta.status !== 200) {
+          return this.$message.error("获取角色失败");
+        }
+        this.rolesList = res.data;
+      });
+    },
+    saveRole(data) {
+      saveRole(data).then((res) => {
+        if (res.meta.status !== 200) {
+          return this.$message.error("更新用户角色失败");
+        }
+        this.$message.success("更新角色成功");
+        this.getUserList(this.queryInfo);
+      });
     },
   },
 };
