@@ -29,7 +29,10 @@ import {
   MessageBox,
   Tag,
   Tree,
-  Cascader
+  Cascader,
+  Alert,
+  Tabs,
+  TabPane
 } from "element-ui";
 
 // login注册的插件
@@ -71,7 +74,9 @@ Vue.use(Tree)
 
 // Goods注册的组件
 Vue.use(Cascader)
-
+Vue.use(Alert);
+Vue.use(Tabs);
+Vue.use(TabPane);
 
 
 
