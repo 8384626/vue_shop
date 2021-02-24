@@ -32,7 +32,9 @@ import {
   Cascader,
   Alert,
   Tabs,
-  TabPane
+  TabPane,
+  Steps,
+  Step
 } from "element-ui";
 
 // login注册的插件
@@ -78,5 +80,6 @@ Vue.use(Alert);
 Vue.use(Tabs);
 Vue.use(TabPane);
 
-
-
+// AddPage注册的组件
+Vue.use(Steps)
+Vue.use(Step)
