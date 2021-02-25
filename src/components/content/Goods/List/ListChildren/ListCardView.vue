@@ -41,7 +41,11 @@
         </el-table-column>
         <el-table-column label="操作" width="200">
           <template slot-scope="scope">
-            <el-button type="primary" icon="el-icon-edit" size="mini"
+            <el-button
+              type="primary"
+              icon="el-icon-edit"
+              size="mini"
+              @click="updateData(scope.row.goods_id)"
               >编辑</el-button
             >
             <el-button
@@ -98,7 +102,7 @@ export default {
     dateFormat(originVal) {
       const dt = new Date(originVal * 1000);
       const y = dt.getFullYear();
-      const m =(dt.getMonth() + "").padStart(2, "0")
+      const m = (dt.getMonth() + 1 + "").padStart(2, "0");
       const d = (dt.getDate() + "").padStart(2, "0");
 
       const hh = (dt.getHours() + "").padStart(2, "0");
@@ -131,10 +135,19 @@ export default {
         }
       ).catch((err) => err);
       if (result !== "confirm") return;
-      this.$emit('removeById', id);
+      this.$emit("removeById", id);
     },
-    goAddpage(){
-      this.$router.push('/goods/add')
+    goAddpage() {
+      this.$router.push("/goods/add");
+    },
+    updateData(id){
+      // this.$router.push('/goods/edit')
+      this.$router.push({
+        path:'/goods/edit',
+        query:{
+          id
+        }
+      })
     }
   },
   computed: {},

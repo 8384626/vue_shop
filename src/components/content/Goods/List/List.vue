@@ -7,6 +7,7 @@
       :goodsList="goodsList"
       :total="total"
       @removeById="removeById"
+      @updateData="updateData"
     ></list-card-view>
   </div>
 </template>
@@ -16,7 +17,7 @@ import ListBreadCrumbNav from "./ListChildren/ListBreadCrumbNav.vue";
 import ListCardView from "./ListChildren/ListCardView.vue";
 
 // 网络相关请求
-import { getListDate, removeById } from "network/list";
+import { getListDate, removeById, updateByIdData } from "network/list";
 export default {
   components: { ListBreadCrumbNav, ListCardView },
   data() {
@@ -37,6 +38,9 @@ export default {
     removeById(id) {
       this.removeById(id);
     },
+    updateData(id){
+      this.updateByIdData(id)
+    },
     /**
      * 所有的网络请求
      */
@@ -48,16 +52,7 @@ export default {
         this.goodsList = res.data.goods;
         this.total = res.data.total;
       });
-    },
-    removeById(id) {
-      removeById(id).then((res) => {
-        if (res.meta.status !== 200) {
-          return this.$message.error("删除数据失败");
-        }
-        console.log(res);
-        this.getListDate(this.queryInfo)
-      });
-    },
+    }
   },
 };
 </script>

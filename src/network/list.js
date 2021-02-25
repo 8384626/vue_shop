@@ -21,3 +21,11 @@ export function getCateParamList(data){
 export function setCateDate(data){
   return http.post('goods',data)
 }
+// 根据ID查询信息
+export function updateByIdData(id){
+  return http.get(`goods/${id}`)
+}
+// 修改完毕提交的shuju
+export function updateCateData(data){
+  return http.put(`goods/${data.goods_id}`,data)
+}

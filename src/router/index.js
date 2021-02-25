@@ -10,8 +10,8 @@ const Roles = () => import("components/content/Power/Roles.vue");
 const Cate = () => import("components/content/Goods/Cate/Cate.vue");
 const Params = () => import("components/content/Goods/Params/Params.vue");
 const List = () => import("components/content/Goods/List/List.vue");
-const Add = () =>
-  import("components/content/Goods/List/ListChildren/Addpage/add");
+const Add = () => import("components/content/Goods/List/ListChildren/Addpage/add");
+const Edit = () => import("components/content/Goods/List/ListChildren/EditPage/edit");
 
 Vue.use(VueRouter);
 
@@ -60,6 +60,10 @@ const routes = [
       {
         path: "/goods/add",
         component: Add
+      },
+      {
+        path: "/goods/edit",
+        component: Edit
       }
     ],
   },

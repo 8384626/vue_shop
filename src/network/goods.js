@@ -23,5 +23,4 @@ export function updateCateDate(data){
 // 删除分类信息
 export function deletCateDate(id){
   return http.delete(`categories/${id}`)
-
 }
