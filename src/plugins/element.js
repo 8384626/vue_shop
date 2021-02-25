@@ -34,7 +34,11 @@ import {
   Tabs,
   TabPane,
   Steps,
-  Step
+  Step,
+  CheckboxGroup,
+  Checkbox,
+  Upload,
+  Image
 } from "element-ui";
 
 // login注册的插件
@@ -83,3 +87,7 @@ Vue.use(TabPane);
 // AddPage注册的组件
 Vue.use(Steps)
 Vue.use(Step)
+Vue.use(CheckboxGroup)
+Vue.use(Checkbox);
+Vue.use(Upload);
+Vue.use(Image);

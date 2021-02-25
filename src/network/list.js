@@ -12,3 +12,12 @@ export function removeById(id){
 export function getCateList(){
   return http.get('categories')
 }
+
+// 获取所有参数列表
+export function getCateParamList(data){
+  return http.get(`categories/${data.id}/attributes`,data)
+}
+// 添加商品
+export function setCateDate(data){
+  return http.post('goods',data)
+}
