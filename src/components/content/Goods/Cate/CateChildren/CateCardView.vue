@@ -124,6 +124,8 @@
 </template>
 
 <script>
+import TreeTable from 'vue-table-with-tree-grid'
+
 export default {
   props: {
     queryInfo: {
@@ -298,6 +300,9 @@ export default {
   created() {
     this.getCateList(this.queryInfo);
   },
+  components:{
+    TreeTable
+  }
 };
 </script>
 

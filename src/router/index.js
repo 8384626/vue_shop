@@ -12,6 +12,7 @@ const Params = () => import("components/content/Goods/Params/Params.vue");
 const List = () => import("components/content/Goods/List/List.vue");
 const Add = () => import("components/content/Goods/List/ListChildren/Addpage/add");
 const Edit = () => import("components/content/Goods/List/ListChildren/EditPage/edit");
+const Order= () =>import("components/content/Order/order.vue")
 
 Vue.use(VueRouter);
 
@@ -63,7 +64,11 @@ const routes = [
       },
       {
         path: "/goods/edit",
-        component: Edit
+        component: Edit 
+      },
+      {
+        path: "/orders",
+        component: Order
       }
     ],
   },
