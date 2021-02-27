@@ -17,16 +17,6 @@ module.exports = {
         .entry("app")
         .clear()
         .add("./src/main-prod.js");
-
-        config.set('externals',{
-          vue:'vue',
-          'vue-router':'VueRouter',
-          axios:'axios',
-          lodash:'_',
-          echarts:'echarts',
-          nprogress:'Nprogress',
-          'vue-quill-editor':'VueQuillEditor'
-        })
     });
 
     // 开发模式
