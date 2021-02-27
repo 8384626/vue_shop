@@ -32,8 +32,8 @@ export default {
   data() {
     return {
       loginFrom: {
-        username: "",
-        password: "",
+        username: "admin",
+        password: "123456",
       },
       // 表单的验证规则对象
       loginFromRules: {
