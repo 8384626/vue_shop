@@ -219,6 +219,7 @@ export default {
     // 监听 pagesize的改变
     handleSizeChange(newSize) {
       this.queryInfo.pagesize = newSize;
+      this.queryInfo.pagenum = 1
       this.getCateList(this.queryInfo);
     },
     // 监听 pagenum的改变
@@ -308,7 +309,7 @@ export default {
 
 <style scoped>
 .TreeTable {
-  height: calc(100vh - 490px);
+  max-height: calc(100vh - 490px);
   overflow-y: scroll;
 }
 .addCate {

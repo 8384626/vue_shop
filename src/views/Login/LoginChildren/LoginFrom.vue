@@ -32,8 +32,8 @@ export default {
   data() {
     return {
       loginFrom: {
-        username: "admin",
-        password: "123456",
+        username: "",
+        password: "",
       },
       // 表单的验证规则对象
       loginFromRules: {
@@ -75,8 +75,7 @@ export default {
     // 发送具体的网络数据
     getLoginDate(user) {
       getLoginDate(user).then(res => {
-        console.log(res);
-        if(res.meta.status == 200){
+          if(res.meta.status == 200){
           this.$message.success('登陆成功')
           window.sessionStorage.setItem('token',res.data.token)
           this.$router.replace('/home')

@@ -118,6 +118,7 @@ export default {
     },
     handleSizeChange(newSize) {
       this.queryInfo.pagesize = newSize;
+      this.queryInfo.pagenum = 1
       this.getListDate(this.queryInfo);
     },
     handleCurrentChange(newPage) {

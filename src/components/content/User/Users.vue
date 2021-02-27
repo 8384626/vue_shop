@@ -288,6 +288,7 @@ export default {
     //监听 pagesize改变的事件
     handleSizeChange(newSize) {
       this.queryInfo.pagesize = newSize;
+      this.queryInfo.pagenum = 1
       this.getUserList(this.queryInfo);
     },
     // 监听页码值改变的事件
